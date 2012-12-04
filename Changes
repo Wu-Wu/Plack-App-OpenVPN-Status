@@ -1,6 +1,0 @@
-Revision history for Perl extension Plack::App::OpenVPN::Status.
-
-0.1.1  Tue Dec  4 04:41:33 2012
-	- original version; created by h2xs 1.23 with options
-		-X -A -b 5.8.9 -n Plack::App::OpenVPN::Status --skip-exporter -v 0.1.1
-

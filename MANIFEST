@@ -1,7 +1,12 @@
 .gitignore
-Changes
 Makefile.PL
 MANIFEST
 README.md
+eg/app.psgi
+eg/static/bootstrap.min.css
+eg/static/bootstrap.min.js
+eg/static/jquery.min.js
+eg/status.log
 t/00_compile.t
+t/01_basic.t
 lib/Plack/App/OpenVPN/Status.pm
