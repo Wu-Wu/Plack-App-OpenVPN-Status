@@ -1,12 +1,26 @@
 use 5.008009;
 use ExtUtils::MakeMaker;
-# See lib/ExtUtils/MakeMaker.pm for details of how to influence
-# the contents of the Makefile that is written.
-WriteMakefile(
-    NAME              => 'Plack::App::OpenVPN::Status',
-    VERSION_FROM      => 'lib/Plack/App/OpenVPN/Status.pm', # finds $VERSION
-    PREREQ_PM         => {}, # e.g., Module::Name => 1.1
-    ($] >= 5.005 ?     ## Add these new keywords supported since 5.005
-      (ABSTRACT_FROM  => 'lib/Plack/App/OpenVPN/Status.pm', # retrieve abstract from module
-       AUTHOR         => 'Anton Gerasimov <chim@zyxmasta.com>') : ()),
+
+my %options = (
+    'NAME'          => 'Plack::App::OpenVPN::Status',
+    'VERSION_FROM'  => 'lib/Plack/App/OpenVPN/Status.pm',
+    'AUTHOR'        => 'Anton Gerasimov <me@zyxmasta.com>',
+    'ABSTRACT_FROM' => 'lib/Plack/App/OpenVPN/Status.pm',
+    'LICENSE'       => 'perl',
+    'PREREQ_PM'     => {
+        'Carp'    => 0,
+        'Plack'   => '0.9979',
+        'parent'  => 0,
+        'strict'  => 0,
+        'warnings' => 0
+    },
+    'BUILD_REQUIRES' => {
+        'Test::Deep' => '0.108',
+        'Test::More' => '0.98',
+    },
+    'test' => {
+        'TESTS' => 't/*.t',
+    }
 );
+
+WriteMakefile(%options);
