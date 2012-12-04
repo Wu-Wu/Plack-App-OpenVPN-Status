@@ -9,6 +9,7 @@ my %options = (
     'LICENSE'       => 'perl',
     'PREREQ_PM'     => {
         'Plack'   => '0.9979',
+        'Text::MicroTemplate' => '0.15',
         'parent'  => 0,
         'strict'  => 0,
         'warnings' => 0
