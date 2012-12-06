@@ -1,4 +1,4 @@
-use 5.008009;
+use 5.010;
 use ExtUtils::MakeMaker;
 
 my %options = (
@@ -17,6 +17,7 @@ my %options = (
     'BUILD_REQUIRES' => {
         'Test::More' => '0.98',
     },
+    'MIN_PERL_VERSION' => '5.10.0',
     'test' => {
         'TESTS' => 't/*.t',
     }

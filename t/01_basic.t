@@ -13,7 +13,6 @@ my $app = builder {
     mount '/foo' => Plack::App::OpenVPN::Status->new; # undefined status source
     mount '/bar' => Plack::App::OpenVPN::Status->new(status_from => 't/nonexistent.log');
     mount '/baz' => Plack::App::OpenVPN::Status->new(status_from => 't/status-empty.log');
-    mount '/qux' => Plack::App::OpenVPN::Status->new(status_from => 't/status-users.log');
 };
 
 test_psgi $app, sub {
@@ -33,12 +32,6 @@ test_psgi $app, sub {
     is $res->code, 200, 'Correct status (with no users): response code';
     like $res->content, qr|There is no connected OpenVPN users|, 'Correct status (with no users): content';
     like $res->content, qr|Tue Dec  4 02:31:18 2012|, 'Correct status (with no users): status date, time';
-
-    $res = $cb->(GET '/qux');
-    is $res->code, 200, 'Correct status (with users): response code';
-    like $res->content, qr|cadvecisvo|, 'Correct status (with users): common name';
-    like $res->content, qr|00:ff:de:ad:be:ef|, 'Correct status (with users): virtual address';
-    like $res->content, qr|Tue Dec  4 11:05:56 2012|, 'Correct status (with users): status date, time';
 
 };
 

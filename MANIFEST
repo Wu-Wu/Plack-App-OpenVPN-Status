@@ -9,4 +9,12 @@ eg/static/jquery.min.js
 eg/status.log
 t/00_compile.t
 t/01_basic.t
+t/02_status_version_1.t
+t/03_status_version_2.t
+t/04_status_version_3.t
+t/05_pod.t
+t/status-empty.log
+t/status-v1.log
+t/status-v2.log
+t/status-v3.log
 lib/Plack/App/OpenVPN/Status.pm
