@@ -1,10 +1,19 @@
 use 5.010;
 use ExtUtils::MakeMaker;
 
+my $meta_merge = {
+    META_MERGE => {
+        resources => {
+            repository => 'https://github.com/Wu-Wu/Plack-App-OpenVPN-Status',
+            bugtracker => 'https://github.com/Wu-Wu/Plack-App-OpenVPN-Status/issues',
+        },
+    }
+};
+
 my %options = (
     'NAME'          => 'Plack::App::OpenVPN::Status',
     'VERSION_FROM'  => 'lib/Plack/App/OpenVPN/Status.pm',
-    'AUTHOR'        => 'Anton Gerasimov <me@zyxmasta.com>',
+    'AUTHOR'        => 'Anton Gerasimov <chim@cpan.org>',
     'ABSTRACT_FROM' => 'lib/Plack/App/OpenVPN/Status.pm',
     'LICENSE'       => 'perl',
     'PREREQ_PM'     => {
@@ -20,7 +29,8 @@ my %options = (
     'MIN_PERL_VERSION' => '5.10.0',
     'test' => {
         'TESTS' => 't/*.t',
-    }
+    },
+    $ExtUtils::MakeMaker::VERSION >= 6.50 ? (%$meta_merge) : (),
 );
 
 WriteMakefile(%options);

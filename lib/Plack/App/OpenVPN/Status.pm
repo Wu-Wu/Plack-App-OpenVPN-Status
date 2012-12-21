@@ -9,9 +9,9 @@ use warnings;
 use parent 'Plack::Component';
 use Carp ();
 use Text::MicroTemplate;
-use Plack::Util::Accessor qw/renderer status_from/;
+use Plack::Util::Accessor qw/renderer status_from custom_view/;
 
-our $VERSION = '0.1.3';
+our $VERSION = '0.1.4';
 
 #
 # default view (uses Twitter Bootstrap v2.x.x layout)
@@ -67,10 +67,6 @@ sub default_view {
 % }
             </div>
         </div>
-        <!--
-        <script src="/static/jquery.min.js"></script>
-        <script src="/static/bootstrap.min.js"></script>
-        -->
     </body>
 </html>
 EOTMPL
@@ -80,9 +76,20 @@ EOTMPL
 sub prepare_app {
     my ($self) = @_;
 
+    my $t_view = $self->default_view;
+
+    if ($self->custom_view) {
+        if (ref($self->custom_view) eq 'CODE') {
+            $t_view = $self->custom_view->();
+        }
+        else {
+            Carp::carp "Parameter 'custom_view' must be a CODEREF";
+        }
+    }
+
     $self->renderer(
         Text::MicroTemplate->new(
-            template   => $self->default_view,
+            template   => $t_view,
             tag_start  => '<%',
             tag_end    => '%>',
             line_start => '%',
@@ -309,6 +316,49 @@ It parse OpenVPN status log and display active sessions. Supported all three ver
 
 I<Twitter Bootstrap> layout is used to diplay active OpenVPN sessions.
 
+=head1 METHODS
+
+=head2 new([%options])
+
+Creates a new application. The following options are supported:
+
+=over 4
+
+=item B<status_from>
+
+Path to OpenVPN server status log file. This option is B<required>. At the moment, the application can able to read versions 1, 2, 3 of the status log file.
+
+=item B<custom_view>
+
+Coderef used as a view to display sessions. This must be a valid Text::MicroTemplate's template. The hashref of params is passed to the view as first argument. So you can use it like this:
+
+    % my $vars = $_[0];
+
+Now B<$vars> contains the structure like this:
+
+    $vars = {
+        'updated' => 'Wed Dec  5 21:25:58 2012',
+        'version' => '2',
+        'users'   => [
+            {
+                'common-name' => 'cadvecisvo',
+                'remote-ip'   => '1.2.3.4',
+                'remote-port' => '4944',
+                'rx-bytes'    => '1.21 Mio',
+                'tx-bytes'    => '503.1 Kio',
+                'connected'   => 'Wed Dec  5 21:16:58 2012',
+                'virtual'     => '00:ff:de:ad:be:ef',
+                'last-ref'    => 'Wed Dec  5 21:25:55 2012',
+            }
+        ]
+    }
+
+=back
+
+=head2 default_view
+
+This is the default view to display sessions. It uses Twitter Bootstrap layout.
+
 =head1 SEE ALSO
 
 L<Plack>
@@ -321,7 +371,7 @@ L<Twitter Bootstrap|https://github.com/twitter/bootstrap>
 
 =head1 AUTHOR
 
-Anton Gerasimov, E<lt>me {at} zyxmasta.comE<gt>
+Anton Gerasimov, E<lt>chim@cpan.orgE<gt>
 
 =head1 COPYRIGHT AND LICENSE
 
