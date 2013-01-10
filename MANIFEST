@@ -1,4 +1,5 @@
 Makefile.PL
+Changes
 MANIFEST
 README.md
 eg/app.psgi

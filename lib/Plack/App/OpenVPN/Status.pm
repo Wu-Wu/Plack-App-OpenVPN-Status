@@ -11,7 +11,7 @@ use Carp ();
 use Text::MicroTemplate;
 use Plack::Util::Accessor qw/renderer status_from custom_view/;
 
-our $VERSION = '0.1.4';
+our $VERSION = '0.15';
 
 #
 # default view (uses Twitter Bootstrap v2.x.x layout)
@@ -293,6 +293,8 @@ sub _ovpn_status_v2_parse {
 1;
 __END__
 
+=pod
+
 =head1 NAME
 
 Plack::App::OpenVPN::Status - Plack application to display the sessions of OpenVPN server
@@ -305,7 +307,10 @@ Plack::App::OpenVPN::Status - Plack application to display the sessions of OpenV
 
     builder {
         mount '/static' => Plack::App::File->new(root => "/path/to/static");
-        mount '/' => Plack::App::OpenVPN::Status->new(status_from => "/path/to/openvpn/status.log");
+        mount '/' =>
+            Plack::App::OpenVPN::Status->new(
+                status_from => "/path/to/openvpn/status.log"
+            );
     };
 
 =head1 DESCRIPTION
@@ -377,9 +382,7 @@ Anton Gerasimov, E<lt>chim@cpan.orgE<gt>
 
 Copyright (C) 2012 by Anton Gerasimov
 
-This library is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself, either Perl version 5.12.4 or,
-at your option, any later version of Perl 5 you may have available.
-
+This library is free software; you can redistribute it and/or modify it
+under the same terms as Perl itself.
 
 =cut
