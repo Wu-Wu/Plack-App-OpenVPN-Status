@@ -1,7 +1,7 @@
 Makefile.PL
 Changes
 MANIFEST
-README.md
+README
 eg/app.psgi
 eg/static/bootstrap.min.css
 eg/status.log
