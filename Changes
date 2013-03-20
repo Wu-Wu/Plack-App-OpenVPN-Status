@@ -1,6 +1,8 @@
 Revision history for Perl extension Plack::App::OpenVPN::Status.
 
 {{$NEXT}}
+
+0.16    Wed Mar 20 18:08:37 2013 +0000
     - dzillify distribution
     - updated pod documentation
     - refactored *.t
