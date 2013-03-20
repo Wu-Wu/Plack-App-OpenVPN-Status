@@ -11,7 +11,8 @@ use Carp ();
 use Text::MicroTemplate;
 use Plack::Util::Accessor qw/renderer status_from custom_view/;
 
-our $VERSION = '0.15';
+# VERSION
+# AUTHORITY
 
 #
 # default view (uses Twitter Bootstrap v2.x.x layout)
@@ -83,7 +84,7 @@ sub prepare_app {
             $t_view = $self->custom_view->();
         }
         else {
-            Carp::carp "Parameter 'custom_view' must be a CODEREF";
+            Carp::croak "Parameter 'custom_view' must be a CODEREF";
         }
     }
 
@@ -290,14 +291,11 @@ sub _ovpn_status_v2_parse {
     $vars;
 }
 
-1;
+1; # End of Plack::App::OpenVPN::Status
+
 __END__
 
 =pod
-
-=head1 NAME
-
-Plack::App::OpenVPN::Status - Plack application to display the sessions of OpenVPN server
 
 =head1 SYNOPSIS
 
@@ -373,16 +371,5 @@ L<Text::MicroTemplate>
 L<OpenVPN Manual|http://openvpn.net/index.php/open-source/documentation/manuals.html>
 
 L<Twitter Bootstrap|https://github.com/twitter/bootstrap>
-
-=head1 AUTHOR
-
-Anton Gerasimov, E<lt>chim@cpan.orgE<gt>
-
-=head1 COPYRIGHT AND LICENSE
-
-Copyright (C) 2012 by Anton Gerasimov
-
-This library is free software; you can redistribute it and/or modify it
-under the same terms as Perl itself.
 
 =cut

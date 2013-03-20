@@ -15,4 +15,5 @@ META.*
 MYMETA.*
 nytprof.out
 pm_to_blib
-*.tar.gz
+Plack-App-OpenVPN-Status-*.tar.gz
+Plack-App-OpenVPN-Status-*/
