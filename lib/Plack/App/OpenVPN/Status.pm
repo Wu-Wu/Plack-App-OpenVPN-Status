@@ -2,9 +2,9 @@ package Plack::App::OpenVPN::Status;
 
 # ABSTRACT: Plack application to display the sessions of OpenVPN server
 
-use 5.010;
 use strict;
 use warnings;
+use feature ':5.10';
 
 use parent 'Plack::Component';
 use Carp ();
@@ -315,7 +315,7 @@ __END__
 
 B<Plack::App::OpenVPN::Status> is an application to display active sessions of the OpenVPN server.
 
-It parse OpenVPN status log and display active sessions. Supported all three versions of the status log. Check the OpenVPN server documentation how to set up version. Howewer, there is no needs (and no ability, at the moment) to point version of status log. Application detect it authomatically. Also status log version will be diplayed on the generated web page.
+It parses OpenVPN status log and displays active sessions. Supported all three versions of the status log. Check the OpenVPN server documentation how to set up version. Howewer, there is no needs (and no ability, at the moment) to point version of status log. Application detect it authomatically. Also status log version will be diplayed on the generated web page.
 
 I<Twitter Bootstrap> layout is used to diplay active OpenVPN sessions.
 
@@ -362,9 +362,23 @@ Now B<$vars> contains the structure like this:
 
 This is the default view to display sessions. It uses Twitter Bootstrap layout.
 
+=head2 openvpn_status
+
+Parses OpenVPN status log. Automatically selects parser for given version of file.
+
+=head2 prepare_app
+
+See L<Plack::Component>
+
+=head2 call
+
+See L<Plack::Component>
+
 =head1 SEE ALSO
 
 L<Plack>
+
+L<Plack::Component>
 
 L<Text::MicroTemplate>
 
